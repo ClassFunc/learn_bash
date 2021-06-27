@@ -1,4 +1,4 @@
-# !/usr/bin/env bash
+# 25 bash script example
 
 ### 1. Hello bash script
 
@@ -27,7 +27,7 @@ echo "Tôi tên là $name, Năm nay tôi $AGE tuổi."
 
 ```shell
 echo "Bạn đang công việc gì ?"
-read job
+read -r job
 echo "$job là một công việc tuyệt vời"
 ```
 
@@ -35,9 +35,9 @@ echo "$job là một công việc tuyệt vời"
 
 ```shell
 echo "Nhập vào X:"
-read X
+read -r X
 echo "Nhập vào Y"
-read Y
+read -r Y
 
 ((sum=X+Y))
 echo "Sum: $sum"
@@ -47,16 +47,16 @@ echo "Sum: $sum"
 
 ```shell
 echo "Nhập vào số may mắn của bạn"
-read n
+read -r n
 
-if [ $n -eq 101 ]; then
-    echo "Chúc mừng bạn đã đạt giải nhất"
-elif [ $n -eq 510 ]; then
-    echo "Bạn đạt giải nhì"
-elif [ $n -eq 999 ]; then
-    echo "Bạn đạt giải ba"
+if [ "$n" -eq 101 ]; then
+     echo "Chúc mừng bạn đã đạt giải nhất"
+elif [ "$n" -eq 510 ]; then
+     echo "Bạn đạt giải nhì"
+elif [ "$n" -eq 999 ]; then
+     echo "Bạn đạt giải ba"
 else
-    echo "Chúc bạn may mắn lần sau"
+     echo "Chúc bạn may mắn lần sau"
 fi
 ```
 
@@ -64,12 +64,12 @@ fi
 
 ```shell
 echo "Nhập vào số may mắn của bạn"
-read n
+read -r n
 
 case $n in
-    101) echo echo "Chúc mừng bạn đã đạt giải nhất" ;;
-    510) echo "Bạn đạt giải nhì" ;;
-    999) echo "Bạn đạt giải ba" ;;
+     101) echo echo "Chúc mừng bạn đã đạt giải nhất" ;;
+     510) echo "Bạn đạt giải nhì" ;;
+     999) echo "Bạn đạt giải ba" ;;
      *) echo "Chúc bạn may mắn lần sau" ;;
 esac
 ```
@@ -78,7 +78,7 @@ esac
 
 ```shell
 function F1() {
-    echo 'I like bash programming'
+     echo 'I like bash programming'
 }
 
 F1
@@ -88,8 +88,8 @@ F1
 
 ```shell
 Dien_Tich() {
-    area=$(($1 * $2))
-    echo "Diện Tích là : $area m2"
+     area=$(($1 * $2))
+     echo "Diện Tích là : $area m2"
 }
 
 Dien_Tich 10 20
@@ -99,12 +99,12 @@ Dien_Tich 10 20
 
 ```shell
 function greeting() {
-    str="Hello, $name"
-    echo $str
+     str="Hello, $name"
+     echo "$str"
 }
 
 echo "Enter your name"
-read name
+read -r name
 
 val=$(greeting)
 echo "Return value of the function is $val"
@@ -130,7 +130,7 @@ done
 
 ```shell
 for (( counter=10; counter>0; counter-- )); do
-  echo -n "$counter "
+     echo -n "$counter "
 done
 printf "\n"
 ```
@@ -139,21 +139,21 @@ printf "\n"
 
 ```shell
 echo "Enter directory name"
-read newdir
-`mkdir $newdir`
+read -r newdir
+mkdir "$newdir"
 ```
 
 ### 14. Kiểm tra sự tồn tại của thư mục
 
 ```shell
 echo "Enter directory name"
-read ndir
+read -r ndir
 
 if [ -d "$ndir" ]; then
-    echo "Directory exist"
+     echo "Directory exist"
 else
-    `mkdir $ndir`
-    echo "Directory created"
+     mkdir "$ndir"
+     echo "Directory created"
 fi
 ```
 
@@ -161,8 +161,8 @@ fi
 
 ```shell
 echo "Enter file name"
-read newfile
-`touch $newfile`
+read -r newfile
+touch "$newfile"
 ```
 
 ### 16. Kiểm tra sự tồn tại của file
@@ -181,7 +181,7 @@ fi
 ```shell
 file='book.txt'
 while read line; do
-  echo $line
+     echo "$line"
 done < $file
 ```
 
@@ -200,8 +200,8 @@ cat book.txt
 
 ```shell
 echo "Enter filename to remove"
-read fn
-rm -i $fn
+read -r fn
+rm -i "$fn"
 ```
 
 ### 20. Truyền tham số cho file bash
@@ -253,7 +253,7 @@ $ bash command_line.sh X=20 Y=50
 ```shell
 FILE_ENV="./.env"
 if [ -f "$FILE_ENV" ]; then
-  . ./$FILE_ENV
+     . "$FILE_ENV"
 fi
 echo "$ENV"
 ```
@@ -261,13 +261,13 @@ echo "$ENV"
 ### 23. Lấy thời gian
 
 ```shell
-Year=`date +%Y`
-Month=`date +%m`
-Day=`date +%d`
-Hour=`date +%H`
-Minute=`date +%M`
-Second=`date +%S`
-echo `date`
+Year=$(date +%Y)
+Month=$(date +%m)
+Day=$(date +%d)
+Hour=$(date +%H)
+Minute=$(date +%M)
+Second=$(date +%S)
+echo $(date)
 echo "Current Date is: $Day-$Month-$Year"
 echo "Current Time is: $Hour:$Minute:$Second"
 ```
@@ -278,6 +278,7 @@ echo "Current Time is: $Hour:$Minute:$Second"
 echo "Wait for 5 seconds"
 sleep 5
 echo "Completed"
+
 ```
 
 ### 25. send mail
@@ -286,5 +287,5 @@ echo "Completed"
 Recipient="admin@example.com"
 Subject="Greeting"
 Message="Welcome to our site"
-`mail -s $Subject $Recipient <<< $Message`
+mail -s $Subject $Recipient <<< "$Message"
 ```
