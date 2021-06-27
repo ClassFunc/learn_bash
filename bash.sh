@@ -16,27 +16,27 @@ echo "Tôi tên là $name, Năm nay tôi $AGE tuổi."
 
 # 4. Lấy nội dung nhập vào của người dùng
 echo "Bạn đang công việc gì ?"
-read job
+read -r job
 echo "$job là một công việc tuyệt vời"
 
 # 5. Thực hiện tính toàn
 echo "Nhập vào X:"
-read X
+read -r X
 echo "Nhập vào Y"
-read Y
+read -r Y
 
 ((sum=X+Y))
 echo "Sum: $sum"
 
 # 6. Điều kiện rẽ nhánh if, else if, else
 echo "Nhập vào số may mắn của bạn"
-read n
+read -r n
 
-if [ $n -eq 101 ]; then
+if [ "$n" -eq 101 ]; then
   echo "Chúc mừng bạn đã đạt giải nhất"
-elif [ $n -eq 510 ]; then
+elif [ "$n" -eq 510 ]; then
   echo "Bạn đạt giải nhì"
-elif [ $n -eq 999 ]; then
+elif [ "$n" -eq 999 ]; then
   echo "Bạn đạt giải ba"
 else
   echo "Chúc bạn may mắn lần sau"
@@ -44,7 +44,7 @@ fi
 
 # 7. Điều kiện rẽ nhánh case
 echo "Nhập vào số may mắn của bạn"
-read n
+read -r n
 case $n in
   101) echo echo "Chúc mừng bạn đã đạt giải nhất" ;;
   510) echo "Bạn đạt giải nhì" ;;
@@ -70,11 +70,11 @@ Dien_Tich 10 20
 # 10. Khởi tạo function trả về giá trị
 function greeting() {
   str="Hello, $name"
-  echo $str
+  echo "$str"
 }
 
 echo "Enter your name"
-read name
+read -r name
 
 val=$(greeting)
 echo "Return value of the function is $val"
@@ -100,24 +100,24 @@ printf "\n"
 
 # 13. Tạo thư mục
 echo "Enter directory name"
-read newdir
-`mkdir $newdir`
+read -r newdir
+mkdir "$newdir"
 
 # 14. Kiểm tra sự tồn tại của thư mục
 echo "Enter directory name"
-read ndir
+read -r ndir
 
 if [ -d "$ndir" ]; then
   echo "Directory exist"
 else
-  `mkdir $ndir`
+  mkdir "$ndir"
   echo "Directory created"
 fi
 
 # 15. Tạo file
 echo "Enter file name"
-read newfile
-`touch $newfile`
+read -r newfile
+touch "$newfile"
 
 # 16. Kiểm tra sự tồn tại của file
 filename=$1
@@ -130,7 +130,7 @@ fi
 # 17. Đọc nội dụng một file
 file='book.txt'
 while read line; do
-  echo $line
+  echo "$line"
 done < $file
 
 # 18. Thêm nội dung vào file
@@ -143,8 +143,8 @@ cat book.txt
 
 # 19. Xoá file
 echo "Enter filename to remove"
-read fn
-rm -i $fn
+read -r fn
+rm -i "$fn"
 
 # 20. Truyền tham số cho file bash
 
@@ -184,18 +184,18 @@ $ bash command_line.sh Linux Hint
 # 22. Đọc biến môi trường từ file
 FILE_ENV="./.env"
 if [ -f "$FILE_ENV" ]; then
-  . ./$FILE_ENV
+  . "$FILE_ENV"
 fi
 echo "$ENV"
 
 # 23. Lấy thời gian
-Year=`date +%Y`
-Month=`date +%m`
-Day=`date +%d`
-Hour=`date +%H`
-Minute=`date +%M`
-Second=`date +%S`
-echo `date`
+Year=$(date +%Y)
+Month=$(date +%m)
+Day=$(date +%d)
+Hour=$(date +%H)
+Minute=$(date +%M)
+Second=$(date +%S)
+echo $(date)
 echo "Current Date is: $Day-$Month-$Year"
 echo "Current Time is: $Hour:$Minute:$Second"
 
@@ -208,4 +208,4 @@ echo "Completed"
 Recipient="admin@example.com"
 Subject="Greeting"
 Message="Welcome to our site"
-`mail -s $Subject $Recipient <<< $Message`
+mail -s $Subject $Recipient <<< "$Message"
